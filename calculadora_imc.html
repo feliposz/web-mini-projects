@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+  <head>
+  
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta name='title' content='Javascript'  />
+    <meta name='description' content= 'Testes de Javascript 2' />
+  
+    <title>Javascript 2</title>
+    
+    <script type="text/javascript">
+    
+        function btnCalcular_click() {
+            var txtAltura    = document.getElementById("txtAltura");
+            var txtPeso      = document.getElementById("txtPeso");
+            var txtIMC       = document.getElementById("txtIMC");
+            var txtCategoria = document.getElementById("txtCategoria");
+            
+            var altura       = eval(txtAltura.value) / 100;
+            var peso         = eval(txtPeso.value);
+            
+            if (isNaN(altura) || isNaN(peso)) {
+                alert("Valor incorreto, forneça valores numéricos.");
+                return;
+            }
+            
+            var imc          = peso / (altura * altura);
+            
+            txtIMC.value = imc.toFixed(2);
+            
+            txtCategoria.style.color = "black";
+            if (imc < 18.5) {
+                txtCategoria.value = "Abaixo do peso";
+                txtCategoria.style.backgroundColor = "#4040FF";
+            } else if (imc < 25) {
+                txtCategoria.value = "Peso ideal";
+                txtCategoria.style.backgroundColor = "green";
+                txtCategoria.style.color = "white";
+            } else if (imc < 30) {
+                txtCategoria.value = "Acima do peso";
+                txtCategoria.style.backgroundColor = "yellow";
+            } else if (imc < 35) {
+                txtCategoria.value = "Obesidade I";
+                txtCategoria.style.backgroundColor = "orange";
+            } else if (imc < 40) {
+                txtCategoria.value = "Obesidade II";
+                txtCategoria.style.backgroundColor = "red";
+            } else {
+                txtCategoria.value = "Obesidade Mórbida";
+                txtCategoria.style.backgroundColor = "black";
+                txtCategoria.style.color = "red";
+            }
+        }
+    
+    </script>
+    
+  </head>
+  
+  <body style="font-family: Consolas, Lucida Console, Courier New, Monospaced;">
+    <p>Calculo do IMC.</p>
+    
+    <div style="margin: 10px; padding: 10px; border: 2px solid black; background-color: #CCDDFF;">
+    
+        <form>
+        
+            <table border="0" cellspacing="2" cellpadding="3">
+                <tr>
+                    <td>Altura (cm):</td>
+                    <td><input type="text" id="txtAltura" size="15" tabindex="1"/></td>
+                </tr>
+                <tr>
+                    <td>Peso (kg):</td>
+                    <td><input type="text" id="txtPeso" size="15" tabindex="2"/></td>
+                </tr>
+                <tr>
+                    <td>IMC:</td>
+                    <td><input type="text" id="txtIMC" size="15" readonly="true"/></td>
+                </tr>
+                <tr>
+                    <td>Categoria:</td>
+                    <td><input type="text" id="txtCategoria" size="15" readonly="true"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="button" id="btnCalcular" value="Calcular" tabindex="3" onclick="btnCalcular_click();"/>
+                    </td>
+                </tr>
+            </table>
+        
+        </form>
+    
+    </div>
+   
+  </body>
+
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Score</title>
+    <style>
+        .winner {
+            color: green;
+        }
+
+        body {
+            font-family: sans-serif;
+            margin: 15% auto;
+        }
+
+        div {
+            width: 50%;
+            min-width: 450px;
+            margin: 0 auto;
+            padding: 10px;
+            border: 2px inset gray;
+            background-color: #eee;
+        }
+
+        h1 {
+            background-color: white;
+            padding: 3px;
+            border: 2px solid cornflowerblue;
+            text-align: center;
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        #p1Button {
+            background-color: #0f0;            
+        }
+
+        #p2Button {
+            background-color: #ff0;
+        }
+
+        #resetButton {
+            background-color: #80d;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+
+        <h1><span id="p1Display">0</span> to <span id="p2Display">0</span></h1>
+            
+        <p>Playing to: <span id="maxScoreDisplay">5</span></p>
+
+        <input type="number" id="maxScoreInput" value="5">
+        <button id="p1Button">Player One</button>
+        <button id="p2Button">Player Two</button>
+        <button id="resetButton">Reset</button>
+
+    </div>
+
+    <script>
+        var p1Score = 0;
+        var p2Score = 0;
+        var maxScore = 5;
+        var gameOver = false;
+
+        var p1Display = document.querySelector('#p1Display');
+        var p2Display = document.querySelector('#p2Display');
+        var maxScoreDisplay = document.querySelector('#maxScoreDisplay');
+        var maxScoreInput = document.querySelector('#maxScoreInput');
+        var p1Button = document.querySelector('#p1Button');
+        var p2Button = document.querySelector('#p2Button');
+        var resetButton = document.querySelector('#resetButton');
+
+        p1Button.addEventListener('click', function () {
+            if (!gameOver) {
+                p1Score++;
+                p1Display.textContent = p1Score;
+                if (p1Score >= maxScore) {
+                    p1Display.classList.add('winner');
+                    gameOver = true;
+                }
+            }
+        });
+
+        p2Button.addEventListener('click', function () {
+            if (!gameOver) {
+                p2Score++;
+                p2Display.textContent = p2Score;
+                if (p2Score >= maxScore) {
+                    p2Display.classList.add('winner');
+                    gameOver = true;
+                }
+            }
+        });
+
+        resetButton.addEventListener('click', function () {
+            gameOver = false;
+            p1Score = 0;
+            p2Score = 0;
+            p1Display.classList.remove('winner');
+            p2Display.classList.remove('winner');
+            p1Display.textContent = '0';
+            p2Display.textContent = '0';
+        });
+
+        maxScoreInput.addEventListener('change', function () {
+            maxScore = Number(maxScoreInput.value);
+            maxScoreDisplay.textContent = maxScore;
+            if (p1Score === maxScore) {
+                gameOver = true;
+                p1Display.classList.add('winner');
+            }
+            if (p2Score === maxScore) {
+                gameOver = true;
+                p2Display.classList.add('winner');
+            }
+        });
+    </script>
+</body>
+
+</html>
